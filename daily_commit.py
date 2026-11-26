@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Auto commit 10x sehari - versi laptop (Windows / Linux / Mac)
+Auto commit 30x sehari - versi laptop (Windows / Linux / Mac)
 Cara pakai:
   1. Copy file ini ke folder repo kamu
   2. Jalankan sekali:  python daily_commit.py
@@ -9,8 +9,8 @@ Cara pakai:
 Yang dilakukan script ini:
   - Tambah 1 baris ke activity-log.md + update last-update.txt
   - git add, git commit, git push ke branch utama
-  - Maksimal 10 commit per hari; kalau sudah 10, dia berhenti.
-    Jadi jadwalkan 10x sehari (misal tiap 2 jam), bukan 1x.
+  - Maksimal 30 commit per hari; kalau sudah 30, dia berhenti.
+    Jadi jadwalkan 30x sehari (tiap jam + 6x setengah jam), bukan 1x.
 """
 import subprocess
 import sys
@@ -44,13 +44,13 @@ def main():
     today = now.strftime("%Y-%m-%d")
     stamp = now.strftime("%Y-%m-%d %H:%M WIB")
 
-    # 1. Cek: sudah berapa commit hari ini? Maksimal 10.
+    # 1. Cek: sudah berapa commit hari ini? Maksimal 30.
     log = run(["git", "log", "--since", f"{today} 00:00", "--oneline"], check=False)
     count_today = len([line for line in log.stdout.splitlines() if line.strip()])
-    if count_today >= 10:
+    if count_today >= 30:
         print(f"Sudah {count_today} commit hari ini ({today}), coba push dulu kalau ada yang belum ke-push.")
         run(["git", "push"], check=False)
-        print("Skip, sudah 10x hari ini.")
+        print("Skip, sudah 30x hari ini.")
         return
     print(f"Commit ke-{count_today + 1} hari ini ({today}).")
 

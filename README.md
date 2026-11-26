@@ -1,13 +1,13 @@
 # GitHub Auto Commit Harian — neixcyll
 
 Bikin grafik kontribusi GitHub hijau tiap hari, otomatis, $0.
-Sekarang 10x sehari. Dua cara — pilih salah satu, jangan dua-duanya
+Sekarang 30x sehari. Dua cara — pilih salah satu, jangan dua-duanya
 di repo yang sama (nanti dobel commit di hari yang sama).
 
 ## Cara 1 (paling gampang, disarankan): GitHub Actions
 
-Tidak perlu laptop nyala. GitHub yang jalankan 10x sehari,
-jam WIB 07, 09, 11, 13, 15, 17, 19, 21, 23, dan 01.
+Tidak perlu laptop nyala. GitHub yang jalankan 30x sehari:
+tiap jam WIB :00 (24x) + 03:30, 07:30, 11:30, 15:30, 19:30, 23:30 (6x).
 
 1. Buat repo baru di GitHub, misal `daily-commits`, Public, centang Add README.
    - Harus Public, kalau Private grafiknya tidak kehitung kecuali kamu
@@ -16,9 +16,9 @@ jam WIB 07, 09, 11, 13, 15, 17, 19, 21, 23, dan 01.
 2. Upload semua file di folder ini ke repo itu
    (pastikan folder `.github/workflows/daily-commit.yml` ikut ter-upload).
 3. Buka tab **Actions** di repo itu, klik **Daily Auto Commit > Run workflow**
-   untuk tes sekali. Kalau hijau, jadwal 10x sehari jalan sendiri.
-4. Cek di profil https://github.com/neixcyll — kotak hari ini harus hijau,
-   makin gelap karena 10 commit/hari.
+   untuk tes sekali. Kalau hijau, jadwal 30x sehari jalan sendiri.
+4. Cek di profil https://github.com/neixcyll — kotak hari ini harus hijau paling gelap,
+   karena 30 commit/hari.
 
 Email commit sudah diset ke `224485812+neixcyll@users.noreply.github.com`
 (email noreply resmi akunmu), jadi commit-nya kehitung di grafik.
@@ -30,16 +30,17 @@ Kalau kamu mau jalan dari laptop sendiri:
 
 **Windows — Task Scheduler:**
 1. Copy `daily_commit.py`, `activity-log.md`, `last-update.txt` ke folder repo kamu.
-2. Task Scheduler > Create Task > 10 Trigger Daily (07, 09, 11, 13, 15, 17, 19, 21, 23, 01) > Action:
+2. Task Scheduler > Create Task > 30 Trigger Daily — tiap jam :00 (24x) + 03:30, 07:30, 11:30, 15:30, 19:30, 23:30 (6x) > Action:
    `python` dengan argumen `C:\path\ke\repo\daily_commit.py`
 3. Syarat: laptop nyala + internet + repo sudah `git push` pertama kali manual.
 
-**Linux / Mac — cron (10x sehari, tiap 2 jam):**
+**Linux / Mac — cron (30x sehari: tiap jam + 6x setengah jam):**
 ```bash
 # buka crontab
 crontab -e
-# tambah baris ini:
-0 7,9,11,13,15,17,19,21,23,1 * * * /usr/bin/python3 /path/ke/repo/daily_commit.py >> /tmp/daily-commit.log 2>&1
+# tambah dua baris ini:
+0 * * * * /usr/bin/python3 /path/ke/repo/daily_commit.py >> /tmp/daily-commit.log 2>&1
+30 3,7,11,15,19,23 * * * /usr/bin/python3 /path/ke/repo/daily_commit.py >> /tmp/daily-commit.log 2>&1
 ```
 
 Tes manual dulu:
@@ -62,9 +63,9 @@ git push
 
 ## Yang perlu kamu tahu (jujur)
 
-- 10 commit/hari = 1 kotak hijau yang gelap. Warna makin gelap kalau commit
-  makin banyak. 10x sehari itu kelihatan jelas otomatis kalau ada yang buka
-  history-nya, karena isinya berulang tiap 2 jam.
+- 30 commit/hari = 1 kotak hijau paling gelap (level maksimal). Warna makin gelap kalau commit
+  makin banyak. 30x sehari itu kelihatan jelas otomatis kalau ada yang buka
+  history-nya, karena isinya berulang tiap jam.
 - Grafik hijau saja tidak bikin recruiter terkesan kalau isi commit-nya
   kosong. Yang mereka buka adalah repo beneran seperti OculiCare,
   PCM Piping Dashboard, dan CV kamu. Jadi pakai ini sebagai pelengkap,
