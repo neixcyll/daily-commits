@@ -6,10 +6,11 @@ di repo yang sama (nanti dobel commit di hari yang sama).
 
 ## Cara 1 (paling gampang, disarankan): GitHub Actions
 
-Tidak perlu laptop nyala. GitHub yang jalankan 30x sehari:
-tiap jam WIB :17 (24x) + 03:47, 07:47, 11:47, 15:47, 19:47, 23:47 (6x).
-Menitnya ganjil supaya tidak bentrok dengan cron orang lain di awal jam
-(cron GitHub itu best-effort — jadwal :00 sering telat atau dibuang).
+Tidak perlu laptop nyala. GitHub yang jalankan 30 commit langsung dalam satu
+jalan pagi hari jam 07:00 WIB, dengan cadangan 07:30 dan 08:00 WIB kalau jalan
+pertama kelewat. Sekali jalan, langsung 30 commit — nggak perlu nunggu
+berjam-jam. (Jadwal tiap jam yang lama sering dibuang GitHub karena cron-nya
+best-effort, jadi sekarang pakai satu jalan pagi + cadangan.)
 
 1. Buat repo baru di GitHub, misal `daily-commits`, Public, centang Add README.
    - Harus Public, kalau Private grafiknya tidak kehitung kecuali kamu
@@ -18,7 +19,8 @@ Menitnya ganjil supaya tidak bentrok dengan cron orang lain di awal jam
 2. Upload semua file di folder ini ke repo itu
    (pastikan folder `.github/workflows/daily-commit.yml` ikut ter-upload).
 3. Buka tab **Actions** di repo itu, klik **Daily Auto Commit > Run workflow**
-   untuk tes sekali. Kalau hijau, jadwal 30x sehari jalan sendiri.
+   untuk tes sekali — sekali tes langsung nambah 30 commit hari itu.
+   Kalau hijau, jadwal paginya jalan sendiri.
 4. Cek di profil https://github.com/neixcyll — kotak hari ini harus hijau paling gelap,
    karena 30 commit/hari.
 
@@ -67,7 +69,7 @@ git push
 
 - 30 commit/hari = 1 kotak hijau paling gelap (level maksimal). Warna makin gelap kalau commit
   makin banyak. 30x sehari itu kelihatan jelas otomatis kalau ada yang buka
-  history-nya, karena isinya berulang tiap jam.
+  history-nya, karena isinya 30 commit sekaligus tiap pagi.
 - Grafik hijau saja tidak bikin recruiter terkesan kalau isi commit-nya
   kosong. Yang mereka buka adalah repo beneran seperti OculiCare,
   PCM Piping Dashboard, dan CV kamu. Jadi pakai ini sebagai pelengkap,
