@@ -1,12 +1,14 @@
 name: Daily Auto Commit
 
 # Jalan otomatis 30x sehari + bisa dijalankan manual
-# UTC: tiap jam :00 (24x) + :30 di jam 0,4,8,12,16,20 (6x) = 30x/hari
-# WIB: tiap jam :00 + 03:30, 07:30, 11:30, 15:30, 19:30, 23:30
+# UTC: tiap jam :17 (24x) + :47 di jam 0,4,8,12,16,20 (6x) = 30x/hari
+# WIB: tiap jam :17 + 03:47, 07:47, 11:47, 15:47, 19:47, 23:47
+# Menit ganjil (bukan :00/:30) supaya tidak menumpuk dengan cron orang lain
+# di awal jam — cron GitHub itu best-effort dan sering membuang jadwal :00.
 on:
   schedule:
-    - cron: "0 * * * *"
-    - cron: "30 0,4,8,12,16,20 * * *"
+    - cron: "17 * * * *"
+    - cron: "47 0,4,8,12,16,20 * * *"
   workflow_dispatch:
 
 permissions:
