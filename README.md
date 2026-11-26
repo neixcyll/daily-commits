@@ -7,7 +7,9 @@ di repo yang sama (nanti dobel commit di hari yang sama).
 ## Cara 1 (paling gampang, disarankan): GitHub Actions
 
 Tidak perlu laptop nyala. GitHub yang jalankan 30x sehari:
-tiap jam WIB :00 (24x) + 03:30, 07:30, 11:30, 15:30, 19:30, 23:30 (6x).
+tiap jam WIB :17 (24x) + 03:47, 07:47, 11:47, 15:47, 19:47, 23:47 (6x).
+Menitnya ganjil supaya tidak bentrok dengan cron orang lain di awal jam
+(cron GitHub itu best-effort — jadwal :00 sering telat atau dibuang).
 
 1. Buat repo baru di GitHub, misal `daily-commits`, Public, centang Add README.
    - Harus Public, kalau Private grafiknya tidak kehitung kecuali kamu
