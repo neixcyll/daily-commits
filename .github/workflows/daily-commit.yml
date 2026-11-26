@@ -1,10 +1,12 @@
 name: Daily Auto Commit
 
-# Jalan otomatis 10x sehari + bisa dijalankan manual
-# Jam UTC 00,02,04,06,08,10,12,14,16,18 = WIB 07,09,11,13,15,17,19,21,23,01
+# Jalan otomatis 30x sehari + bisa dijalankan manual
+# UTC: tiap jam :00 (24x) + :30 di jam 0,4,8,12,16,20 (6x) = 30x/hari
+# WIB: tiap jam :00 + 03:30, 07:30, 11:30, 15:30, 19:30, 23:30
 on:
   schedule:
-    - cron: "0 0,2,4,6,8,10,12,14,16,18 * * *"
+    - cron: "0 * * * *"
+    - cron: "30 0,4,8,12,16,20 * * *"
   workflow_dispatch:
 
 permissions:
@@ -28,7 +30,9 @@ jobs:
       - name: Commit & push
         run: |
           git config user.name "neixcyll"
+          # Email noreply GitHub kamu (id 224485812) - ini yang bikin commit kehitung di grafik
           git config user.email "224485812+neixcyll@users.noreply.github.com"
           git add activity-log.md last-update.txt
+          # Kalau tidak ada perubahan, jangan error
           git diff --cached --quiet || git commit -m "chore: daily activity $(TZ=Asia/Jakarta date +%Y-%m-%d\ %H:%M)"
           git push
